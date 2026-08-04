@@ -1,0 +1,67 @@
+/* ============================================================
+   Asite — design tokens
+   Single source of truth for colour, type, spacing and motion.
+   Change values here; component styles in main.css consume them.
+   ============================================================ */
+
+:root {
+  /* ---- colour: ink ramp (achromatic) ---- */
+  --ink:        #16181c;   /* headings, primary text            */
+  --ink-2:      #5a5f66;   /* body copy, secondary text         */
+  --ink-3:      #696969;   /* eyebrows, tertiary text           */
+  --ink-black:  #000000;   /* filled primary actions            */
+
+  /* ---- colour: surfaces ---- */
+  --canvas:     #ffffff;   /* default page surface              */
+  --surface:    #f7f9fa;   /* tinted band (platform, AI)        */
+  --card:       #f7f8fa;   /* AI feature cards                  */
+  --frame:      #e8ebed;   /* screenshot frame fill             */
+  --frame-alt:  #eef1f3;   /* platform screenshot frame fill    */
+  --dark:       #16181c;   /* case-studies band                 */
+  --dark-2:     #2d2d2d;   /* closing CTA band                  */
+
+  /* ---- colour: lines ---- */
+  --hairline:       #e2e4e9;              /* 1px rules on light  */
+  --hairline-card:  rgba(22, 24, 28, 0.07);  /* card borders     */
+  --hairline-white: rgba(255, 255, 255, 0.12);/* rules on dark   */
+
+  /* ---- colour: the one red ---- */
+  --brand-red:  #ff3131;   /* logo artwork + Intelligence spark ONLY */
+
+  /* ---- type ---- */
+  --font-sans:  "Inter", -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-mono:  "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  --text-h1:    clamp(32px, 4.2vw, 56px);
+  --text-h2:    clamp(28px, 3.1vw, 40px);
+  --text-h3:    clamp(18px, 1.5vw, 20px);
+  --text-body:  14px;
+  --text-stat:  clamp(26px, 2.2vw, 32px);
+  --text-quote: clamp(20px, 2.6vw, 42px);
+
+  /* ---- layout ---- */
+  --w-hero:     min(80vw, 1692px);   /* hero column               */
+  --w-section:  min(85vw, 1652px);   /* standard section column   */
+  --w-wide:     min(85vw, 1730px);   /* CTA + footer column       */
+  --gutter:     7.5vw;               /* (100vw − 85vw) / 2        */
+
+  /* ---- radii ---- */
+  --r-sm:   4px;    /* buttons, small chips       */
+  --r-md:   8px;    /* nav, overlay cards         */
+  --r-lg:   14px;   /* case + AI cards            */
+  --r-xl:   16px;   /* carousel slides, hero band */
+  --r-2xl:  24px;   /* screenshot frames          */
+
+  /* ---- effects ---- */
+  --shadow-frame: 0 4px 40px rgba(0, 0, 0, 0.1);
+  --glass-nav:    rgba(120, 120, 120, 0.2);
+  --glass-dark:   rgba(0, 0, 0, 0.48);
+  --scrim-hero:   rgba(0, 0, 0, 0.7);
+  --grad-card:    linear-gradient(180deg, rgba(8, 9, 10, 0) 38%, rgba(8, 9, 10, 0.86) 100%);
+  --dotgrid:      radial-gradient(rgba(22, 24, 28, 0.11) 1.2px, transparent 1px);
+
+  /* ---- motion ---- */
+  --ease:     cubic-bezier(0.41, 0.66, 0.36, 0.86);
+  --t-fast:   0.2s;
+  --t-med:    0.3s;
+}
