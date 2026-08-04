@@ -55,6 +55,17 @@
     });
   }
 
+  // mobile nav: floats over the hero at rest, pins to the top once scrolled
+  var nav = document.querySelector(".nav");
+  var mqMobile = window.matchMedia("(max-width: 1079px)");
+  function onNavScroll() {
+    if (!nav) return;
+    if (!mqMobile.matches) { nav.classList.remove("is-stuck"); return; }
+    nav.classList.toggle("is-stuck", window.scrollY > 140);
+  }
+  window.addEventListener("scroll", onNavScroll, { passive: true });
+  onNavScroll();
+
   /* ---------- 4. "Who needs Asite" carousel ---------- */
 
   var rail = document.querySelector(".who__rail");

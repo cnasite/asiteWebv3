@@ -79,7 +79,7 @@ h3 { font-size: var(--text-h3); font-weight: 600; line-height: 1.4; }
   align-items: center;
   justify-content: center;
   gap: 10px;
-  max-height: 44px;
+  max-height: 40px;
   padding: 12px 14px;
   border: 0;
   border-radius: var(--r-sm);
@@ -292,37 +292,32 @@ h3 { font-size: var(--text-h3); font-weight: 600; line-height: 1.4; }
 
 @media (max-width: 1079px) {
   .nav__links, .nav__utility { display: none; }
-  .nav__toggle { display: flex; align-self: center; }
+  .nav__toggle { display: flex; align-self: center; width: 40px; height: 40px; }
 
-  /* fixed slim bar pinned to the viewport top */
-  body { padding-top: 56px; }
+  /* floating glass bar over the hero, like desktop */
   .nav {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    width: 100%;
-    transform: none;
-    z-index: 80;
+    top: 16px;
     min-height: 56px;
     padding: 6px 16px;
-    border-radius: 0;
-    border-left: 0;
-    border-right: 0;
-    border-top: 0;
-    background: rgba(16, 18, 21, 0.66);
-  }
-  .nav__toggle { width: 40px; height: 40px; }
-
-  .nav-menu {
-    position: fixed;
-    top: 62px;
-    left: 12px;
-    right: 12px;
-    width: auto;
-    transform: none;
     z-index: 80;
   }
+
+  /* pinned to the viewport once scrolled (js/main.js toggles .is-stuck) */
+  .nav.is-stuck {
+    position: fixed;
+    top: 8px;
+    background: rgba(14, 16, 19, 0.82);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.28);
+    animation: nav-drop 0.25s var(--ease);
+  }
+
+  .nav-menu { top: 84px; z-index: 80; }
+  .nav.is-stuck + .nav-menu { position: fixed; top: 76px; }
+}
+
+@keyframes nav-drop {
+  from { transform: translateX(-50%) translateY(-12px); opacity: 0.6; }
+  to   { transform: translateX(-50%) translateY(0); opacity: 1; }
 }
 
 /* --- hero copy + stats --- */
@@ -442,7 +437,7 @@ h3 { font-size: var(--text-h3); font-weight: 600; line-height: 1.4; }
 @media (max-width: 1079px) {
   /* hero column breathes on small screens */
   .hero__shell { width: var(--w-section); }
-  .hero__copy { padding: 56px 0 88px; }
+  .hero__copy { padding: 104px 0 88px; }
 
   /* trusted band: never clip, label on one line, bigger logos */
   .hero__band { max-height: none; overflow: visible; }
@@ -868,7 +863,7 @@ h3 { font-size: var(--text-h3); font-weight: 600; line-height: 1.4; }
   line-height: 1.6;
   color: rgba(255, 255, 255, 0.92);
 }
-.cta__actions { display: flex; flex-direction: column; align-items: flex-end; gap: 14px; padding-right: 200px;}
+.cta__actions { display: flex; flex-direction: column; align-items: flex-start; gap: 14px; }
 .cta__actions .btn { min-width: 171px; border-radius: 9px; }
 .btn--book { background: var(--dark); color: #fff; gap: 12px; }
 .btn--book:hover { background: #000; color: #fff; }
