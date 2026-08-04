@@ -19,7 +19,8 @@
     showAnnouncement: true,   // top black announcement bar
     showFourthInsight: true,  // 4th card in the Insights grid
     autoAdvance: false,       // carousel auto-advances every 6s
-    autoAdvanceMs: 6000
+    autoAdvanceMs: 6000,
+    slideDurationMs: 7000     // hero slideshow: time each image is held
   };
 
   /* ---------- 2. Announcement / optional-content toggles ---------- */
@@ -138,16 +139,72 @@
     });
   }
 
-  /* ---------- 6. Hero play / pause control ---------- */
+  /* ---------- 6. Hero slideshow + play / pause control ---------- */
 
   var playWrap = document.querySelector(".hero__play-wrap");
   var playBtn = document.querySelector(".hero__play");
+  var media = document.querySelector(".hero__media");
+  var slides = media ? [].slice.call(media.querySelectorAll("img")) : [];
+  var progressBar = document.querySelector(".hero__progress i");
 
-  if (playWrap && playBtn) {
+  if (media && slides.length) {
+    var current = 0;
+    var paused = false;
+    var slideStart = performance.now();
+    var pausedAt = 0;
+
+    // give the first slide its drift
+    slides[0].classList.add("kb-a");
+
+    function show(idx) {
+      var prev = slides[current];
+      var next = slides[idx];
+      prev.classList.remove("is-active");
+      // restart the Ken Burns animation, alternating direction
+      next.classList.remove("kb-a", "kb-b");
+      void next.offsetWidth; // reflow so the animation restarts
+      next.classList.add(idx % 2 ? "kb-b" : "kb-a", "is-active");
+      current = idx;
+      slideStart = performance.now();
+    }
+
+    function setPaused(state) {
+      paused = state;
+      media.classList.toggle("is-paused", paused);
+      if (playWrap) playWrap.classList.toggle("is-paused", paused);
+      if (playBtn) {
+        playBtn.setAttribute("aria-pressed", String(paused));
+        playBtn.setAttribute("aria-label", paused ? "Play slideshow" : "Pause slideshow");
+      }
+      if (paused) pausedAt = performance.now();
+      else slideStart += performance.now() - pausedAt; // resume where we left off
+    }
+
+    if (playBtn) {
+      playBtn.addEventListener("click", function () { setPaused(!paused); });
+    }
+
+    // one loop drives both the slide changes and the progress bar
+    function tick(now) {
+      if (!paused) {
+        var elapsed = now - slideStart;
+        if (elapsed >= CONFIG.slideDurationMs) {
+          show((current + 1) % slides.length);
+          elapsed = 0;
+        }
+        if (progressBar) {
+          progressBar.style.width = Math.min(100, (elapsed / CONFIG.slideDurationMs) * 100) + "%";
+        }
+      }
+      window.requestAnimationFrame(tick);
+    }
+    window.requestAnimationFrame(tick);
+  } else if (playWrap && playBtn) {
+    // no slideshow present — keep the button as a simple toggle
     playBtn.addEventListener("click", function () {
-      var paused = playWrap.classList.toggle("is-paused");
-      playBtn.setAttribute("aria-pressed", String(paused));
-      playBtn.setAttribute("aria-label", paused ? "Play" : "Pause");
+      var p = playWrap.classList.toggle("is-paused");
+      playBtn.setAttribute("aria-pressed", String(p));
+      playBtn.setAttribute("aria-label", p ? "Play" : "Pause");
     });
   }
 })();

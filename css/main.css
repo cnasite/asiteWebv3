@@ -79,7 +79,7 @@ h3 { font-size: var(--text-h3); font-weight: 600; line-height: 1.4; }
   align-items: center;
   justify-content: center;
   gap: 10px;
-  max-height: 40px;
+  max-height: 44px;
   padding: 12px 14px;
   border: 0;
   border-radius: var(--r-sm);
@@ -142,6 +142,48 @@ h3 { font-size: var(--text-h3); font-weight: 600; line-height: 1.4; }
   padding: 0;
   background: linear-gradient(var(--scrim-hero), var(--scrim-hero)), url("../assets/hero.jpg") center / cover no-repeat;
   color: #fff;
+}
+
+/* --- cinematic slideshow (Ken Burns + crossfade) --- */
+
+.hero__media { position: absolute; inset: 0; overflow: hidden; }
+.hero__media img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 1.4s var(--ease);
+  will-change: opacity, transform;
+}
+.hero__media img.is-active { opacity: 1; }
+
+/* two alternating drift directions; js restarts the animation per slide */
+.hero__media img.kb-a { animation: kb-a 8.5s linear forwards; }
+.hero__media img.kb-b { animation: kb-b 8.5s linear forwards; }
+
+@keyframes kb-a {
+  from { transform: scale(1) translate(0, 0); }
+  to   { transform: scale(1.09) translate(-1.4%, -1%); }
+}
+@keyframes kb-b {
+  from { transform: scale(1.09) translate(1.2%, 0.8%); }
+  to   { transform: scale(1) translate(0, 0); }
+}
+
+/* scrim above the slides, below the content */
+.hero__media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.62);
+}
+
+.hero__media.is-paused img { animation-play-state: paused; }
+
+@media (prefers-reduced-motion: reduce) {
+  .hero__media img.kb-a, .hero__media img.kb-b { animation: none; }
 }
 
 .hero__shell { position: relative; width: var(--w-hero); margin-inline: auto; }
@@ -826,7 +868,7 @@ h3 { font-size: var(--text-h3); font-weight: 600; line-height: 1.4; }
   line-height: 1.6;
   color: rgba(255, 255, 255, 0.92);
 }
-.cta__actions { display: flex; flex-direction: column; align-items: flex-start; gap: 14px; }
+.cta__actions { display: flex; flex-direction: column; align-items: flex-end; gap: 14px; padding-right: 200px;}
 .cta__actions .btn { min-width: 171px; border-radius: 9px; }
 .btn--book { background: var(--dark); color: #fff; gap: 12px; }
 .btn--book:hover { background: #000; color: #fff; }

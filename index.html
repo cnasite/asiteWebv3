@@ -25,6 +25,22 @@
 
   <!-- ======================= Hero ======================= -->
   <header class="hero">
+    <!-- cinematic slideshow: slow Ken Burns drift per slide, crossfaded.
+         Add/remove/reorder <img> tags freely — js/main.js picks them up. -->
+    <div class="hero__media" aria-hidden="true">
+      <img src="assets/slides/01-towers-dusk.jpg" alt="" class="is-active" />
+      <img src="assets/slides/02-la-skyline.jpg" alt="" loading="lazy" />
+      <img src="assets/slides/03-steel-worker.jpg" alt="" loading="lazy" />
+      <img src="assets/slides/04-rail-machine.jpg" alt="" loading="lazy" />
+      <img src="assets/slides/05-chicago.jpg" alt="" loading="lazy" />
+      <img src="assets/slides/06-concrete-pour.jpg" alt="" loading="lazy" />
+      <img src="assets/slides/07-rail-night.jpg" alt="" loading="lazy" />
+      <img src="assets/slides/08-formwork.jpg" alt="" loading="lazy" />
+      <img src="assets/slides/09-precast-team.jpg" alt="" loading="lazy" />
+      <img src="assets/slides/10-autumn-tracks.jpg" alt="" loading="lazy" />
+      <img src="assets/slides/11-rail-crew.jpg" alt="" loading="lazy" />
+    </div>
+
     <div class="hero__shell">
 
       <nav class="nav" aria-label="Main">
@@ -66,7 +82,7 @@
       <div class="hero__copy">
         <h1>One Platform for everything you build.</h1>
         <p class="hero__sub">Asite suite of AI-driven products turn connected project data into intelligent action and brings your whole construction 
-          life-cycle into one place so the right information reaches the right person, at the right time, securely.</p>
+          life-cycle into one place.</p>
 
         <div class="hero__ctas">
           <a class="btn btn--white" href="#cta">Request a demo</a>
