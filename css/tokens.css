@@ -54,7 +54,8 @@
 
   /* ---- effects ---- */
   --shadow-frame: 0 4px 40px rgba(0, 0, 0, 0.1);
-  --glass-nav:    rgba(120, 120, 120, 0.2);
+  --glass-nav:    rgba(255, 255, 255, 0.14);  /* light glass: nav      */
+  --glass-band:   rgba(9, 11, 14, 0.55);       /* dark glass: trusted band */
   --glass-dark:   rgba(0, 0, 0, 0.48);
   --scrim-hero:   rgba(0, 0, 0, 0.7);
   --grad-card:    linear-gradient(180deg, rgba(8, 9, 10, 0) 38%, rgba(8, 9, 10, 0.86) 100%);
