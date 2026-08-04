@@ -24,7 +24,7 @@
 *::before,
 *::after { box-sizing: border-box; }
 
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; overflow-x: clip; }
 
 body {
   margin: 0;
@@ -129,6 +129,10 @@ h3 { font-size: var(--text-h3); font-weight: 600; line-height: 1.4; }
   color: #fff;
 }
 .announce.is-hidden { display: none; }
+
+@media (max-width: 640px) {
+  .announce { font-size: 8px; padding: 8px 12px; max-height: none; }
+}
 
 
 /* ============ 4. Hero ============ */
@@ -246,7 +250,37 @@ h3 { font-size: var(--text-h3); font-weight: 600; line-height: 1.4; }
 
 @media (max-width: 1079px) {
   .nav__links, .nav__utility { display: none; }
-  .nav__toggle { display: flex; }
+  .nav__toggle { display: flex; align-self: center; }
+
+  /* fixed slim bar pinned to the viewport top */
+  body { padding-top: 56px; }
+  .nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    transform: none;
+    z-index: 80;
+    min-height: 56px;
+    padding: 6px 16px;
+    border-radius: 0;
+    border-left: 0;
+    border-right: 0;
+    border-top: 0;
+    background: rgba(16, 18, 21, 0.66);
+  }
+  .nav__toggle { width: 40px; height: 40px; }
+
+  .nav-menu {
+    position: fixed;
+    top: 62px;
+    left: 12px;
+    right: 12px;
+    width: auto;
+    transform: none;
+    z-index: 80;
+  }
 }
 
 /* --- hero copy + stats --- */
@@ -364,7 +398,27 @@ h3 { font-size: var(--text-h3); font-weight: 600; line-height: 1.4; }
 }
 
 @media (max-width: 1079px) {
-  .hero__play-wrap { right: 8px; }
+  /* hero column breathes on small screens */
+  .hero__shell { width: var(--w-section); }
+  .hero__copy { padding: 56px 0 88px; }
+
+  /* trusted band: never clip, label on one line, bigger logos */
+  .hero__band { max-height: none; overflow: visible; }
+  .hero__band-label { font-size: 10px; letter-spacing: 0.05em; white-space: nowrap; }
+  .hero__logos { gap: 18px 24px; }
+  .hero__logos img { height: 38px; width: auto; max-width: 140px; }
+
+  /* play/pause pinned flush to the hero's right edge, vertically centred */
+  .hero__band-wrap { position: static; }
+  .hero__play-wrap {
+    position: absolute;
+    right: calc(-1 * var(--gutter));   /* shell is inset by the gutter — pull flush to the viewport edge */
+    top: 50%;
+    bottom: auto;
+    transform: translateY(-50%);
+    z-index: 2;
+  }
+  .hero__play { border-radius: 6px 0 0 6px; }
 }
 
 
@@ -518,12 +572,29 @@ h3 { font-size: var(--text-h3); font-weight: 600; line-height: 1.4; }
 .who__arrow--prev { left:  calc(var(--gutter) + clamp(12px, 3.4vw, 64px)); }
 .who__arrow--next { right: calc(var(--gutter) + clamp(12px, 3.4vw, 64px)); }
 
+/* mobile: stacked full-width cards, no horizontal scrolling */
+@media (max-width: 768px) {
+  .who__rail {
+    flex-direction: column;
+    overflow: visible;
+    gap: 16px;
+    scroll-snap-type: none;
+  }
+  .who-slide {
+    flex: none;
+    width: 100%;
+    min-height: min(560px, 130vw);   /* tall card — image clearly in view, text at the bottom */
+  }
+  .who-slide__scrim { padding: 14px; }
+  .who__arrow { display: none; }
+}
+
 
 /* ============ 7. Asite Intelligence ============ */
 
-.ai { 
-  padding: clamp(56px, 8vw, 133px) 0; 
-  background: var(--surface); 
+.ai {
+  padding: clamp(56px, 8vw, 133px) 0;
+  background: var(--surface);
   background-image: var(--dotgrid);
   background-size: 22px 22px;
 }
@@ -568,6 +639,24 @@ h3 { font-size: var(--text-h3); font-weight: 600; line-height: 1.4; }
   box-shadow: var(--shadow-frame);
 }
 .ai__frame img { width: 100%; border-radius: var(--r-lg); }
+
+/* mobile: scale the interface up and bleed it off the right edge,
+   clipped — same treatment as the platform screenshot */
+@media (max-width: 768px) {
+  .ai__frame {
+    margin-right: calc(-1 * var(--gutter) - 8px);
+    padding-right: 0;
+    border-right: 0;
+    border-radius: var(--r-2xl) 0 0 var(--r-2xl);
+    overflow: hidden;
+  }
+  .ai__frame img {
+    height: clamp(320px, 96vw, 520px);
+    object-fit: cover;
+    object-position: left top;
+    border-radius: 12px 0 0 12px;
+  }
+}
 
 .ai__cards {
   display: grid;
@@ -950,6 +1039,21 @@ h3 { font-size: var(--text-h3); font-weight: 600; line-height: 1.4; }
 
 @media (max-width: 640px) {
   .athena { right: 16px; bottom: 16px; }
+
+  /* trusted band logos: 2-column grid, consistent boxes */
+  .hero__logos {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    justify-items: center;
+    align-items: center;
+    gap: 20px 18px;
+  }
+  .hero__logos img {
+    width: 100%;
+    max-width: 132px;
+    height: 44px;
+    object-fit: contain;
+  }
 }
 
 
