@@ -37,7 +37,7 @@
   --text-h3:    clamp(18px, 1.5vw, 20px);
   --text-body:  14px;
   --text-stat:  clamp(26px, 2.2vw, 32px);
-  --text-quote: clamp(20px, 2.6vw, 42px);
+  --text-quote: clamp(20px, 2.6vw, 28px);
 
   /* ---- layout ---- */
   --w-hero:     min(80vw, 1692px);   /* hero column               */
