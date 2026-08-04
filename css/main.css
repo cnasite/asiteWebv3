@@ -354,7 +354,7 @@ h3 { font-size: var(--text-h3); font-weight: 600; line-height: 1.4; }
   overflow: hidden;
   padding: clamp(12px, 1.8vw, 20px) clamp(16px, 2.4vw, 28px) clamp(16px, 2vw, 24px);
   background: var(--glass-band);               /* dark-mode glass */
-  border: 1px solid rgba(255, 255, 255, 0.16);
+  border: 1px solid rgba(255, 255, 255, 0.05);
   border-bottom: 0;
   border-radius: var(--r-2xl) var(--r-2xl) 0 0;
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.14);
@@ -370,7 +370,6 @@ h3 { font-size: var(--text-h3); font-weight: 600; line-height: 1.4; }
 }
 .hero__logos {
   display: flex;
-  flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
   gap: clamp(16px, 2vw, 32px);
