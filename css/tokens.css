@@ -32,11 +32,11 @@
   --font-sans:  "Inter", -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   --font-mono:  "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
 
-  --text-h1:    clamp(32px, 4.2vw, 56px);
+  --text-h1:    clamp(32px, 4.2vw, 64px);
   --text-h2:    clamp(28px, 3.1vw, 40px);
   --text-h3:    clamp(18px, 1.5vw, 20px);
   --text-body:  16px;
-  --text-stat:  clamp(26px, 2.2vw, 32px);
+  --text-stat:  clamp(26px, 2.2vw, 48px);
   --text-quote: clamp(20px, 2.6vw, 28px);
 
   /* ---- layout ---- */
